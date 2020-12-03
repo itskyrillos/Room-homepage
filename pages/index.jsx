@@ -1,27 +1,10 @@
-import Nav from "../components/navigation";
+import Slider from "../components/slider";
 
 export default function Home() {
   return (
     <div className="container">
-      <Nav />
-
       <header className="header">
-        <div className="header__slider">
-          <div className="header__image-container">
-            <img
-              className="header__image"
-              src="/assets/desktop-image-hero-1.jpg"
-              alt="logo"
-            />
-          </div>
-
-          <div className="header__btn-container">
-            <button className="btn-slider btn-slider--previous">
-              previous
-            </button>
-            <button className="btn-slider btn-slider--next">next</button>
-          </div>
-        </div>
+        <Slider />
 
         <div className="header__content">
           <h1 className="header__title">
