@@ -12,10 +12,10 @@
     "next": "10.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "sass": "^1.29.0"
+    "sass": "^1.30.0"
   },
   "devDependencies": {
     "standard": "^16.0.3",
-    "swiper": "^6.3.5"
+    "swiper": "^6.4.1"
   }
 }

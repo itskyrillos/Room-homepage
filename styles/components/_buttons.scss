@@ -1,18 +1,29 @@
 .btn-slider {
-  display: block;
+  display: relative;
   text-indent: -9999px;
   overflow: hidden;
   border: 0;
   outline: none;
   padding: 0;
 
-  height: 56px;
   width: 56px;
 
   background-repeat: no-repeat;
   background-position: center;
   background-size: 8px;
   background-color: $black;
+
+  &::after {
+    content: "";
+    display: block;
+    padding-bottom: calc(100% / (4 / 3));
+  }
+
+  @include xl {
+    width: 50%;
+
+    background-size: 12px;
+  }
 
   &--previous {
     background-image: url("../../public/assets/icon-slider-previous.svg");

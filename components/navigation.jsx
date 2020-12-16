@@ -21,6 +21,12 @@ export default function Navigation() {
     router.events.on("routeChangeStart", closeMenu);
   });
 
+  // const screenSize = window.innerWidth;
+  // useEffect(() => {
+  //   if (screenSize <= 1200) {
+  //     setState({ clicked: true });
+  //   }
+  // });
   const handleMenu = () => {
     disableMenu();
 

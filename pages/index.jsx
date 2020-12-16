@@ -1,10 +1,29 @@
-import Slider from "../components/slider";
+import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 export default function Home() {
   return (
     <div className="container">
       <header className="header">
-        <Slider />
+        <div className="header__slider">
+          <div className="header__image-container">
+            <Image
+              className="header__image"
+              src="/assets/desktop-image-hero-2.jpg"
+              alt="logo"
+              width={1260}
+              height={1010}
+              layout="responsive"
+            />
+          </div>
+
+          <div className="header__btn-container">
+            <button className="btn-slider btn-slider--previous">
+              previous
+            </button>
+            <button className="btn-slider btn-slider--next">next</button>
+          </div>
+        </div>
 
         <div className="header__content">
           <h1 className="header__title">
@@ -25,7 +44,7 @@ export default function Home() {
       </header>
 
       <section className="about">
-        <div className="about__image-container">
+        <div className="about__image-container about__image-container--left">
           <img
             className="about__image"
             src="/assets/image-about-dark.jpg"
@@ -46,7 +65,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="about__image-container">
+        <div className="about__image-container about__image-container--right">
           <img
             className="about__image"
             src="/assets/image-about-light.jpg"
