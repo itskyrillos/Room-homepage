@@ -6,7 +6,7 @@
     grid-template-columns: repeat(10, 1fr);
   }
 
-  &__slider {
+  &__slider-container {
     position: relative;
 
     @include xl {
@@ -14,15 +14,16 @@
     }
   }
 
+  &__slider {
+    width: 100%;
+  }
+
   &__image-container {
-    overflow: hidden;
+    width: 100%;
 
     @include xl {
       height: 65vh;
     }
-  }
-
-  &__image {
   }
 
   &__btn-container {

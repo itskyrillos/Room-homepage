@@ -1,22 +1,43 @@
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Navigation } from "swiper";
+
+SwiperCore.use(Navigation);
 
 export default function Home() {
   return (
     <div className="container">
       <header className="header">
-        <div className="header__slider">
-          <div className="header__image-container">
-            <Image
-              className="header__image"
-              src="/assets/desktop-image-hero-2.jpg"
-              alt="logo"
-              width={1260}
-              height={1010}
-              layout="responsive"
-            />
-          </div>
-
+        <div className="header__slider-container">
+          <Swiper
+            navigation={{
+              nextEl: ".btn-slider--next",
+              prevEl: ".btn-slider--previous",
+            }}
+            onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log("slide change")}
+            className="header__slider"
+          >
+            <SwiperSlide className="header__image-container">
+              <Image
+                className="header__image"
+                src="/assets/desktop-image-hero-2.jpg"
+                alt="logo"
+                layout="fill"
+                objectFit="contain"
+              />
+            </SwiperSlide>
+            <SwiperSlide className="header__image-container">
+              <Image
+                className="header__image"
+                src="/assets/desktop-image-hero-2.jpg"
+                alt="logo"
+                width={1260}
+                height={1010}
+                layout="responsive"
+              />
+            </SwiperSlide>
+          </Swiper>
           <div className="header__btn-container">
             <button className="btn-slider btn-slider--previous">
               previous
