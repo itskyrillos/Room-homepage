@@ -11,15 +11,19 @@
 
     @include xl {
       grid-column: 1 / 7;
+      overflow: hidden;
+
+
     }
   }
 
   &__slider {
-    width: 100%;
+
   }
 
   &__image-container {
-    width: 100%;
+    height: 45vh;
+    position: relative;
 
     @include xl {
       height: 65vh;
@@ -27,6 +31,7 @@
   }
 
   &__btn-container {
+
     position: absolute;
     bottom: 0;
     right: 0;
@@ -36,7 +41,7 @@
     flex-direction: row;
 
     @include xl {
-      transform: translateX(100%);
+      right: -16.7%;
 
       width: 16.7%;
     }
@@ -47,6 +52,10 @@
 
     @include xl {
       grid-column: 7 / 11;
+      margin: auto 6rem;
+    }
+
+    @include xxl {
       margin: auto 8rem;
     }
   }
@@ -91,9 +100,8 @@
   }
 
   &__image-container {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+    position: relative;
+    height: 35vh;
 
     &--left {
       @include xl {
@@ -108,9 +116,7 @@
     }
   }
 
-  &__image {
-    height: 100%;
-  }
+
 
   &__content {
     margin: 4rem 1.9rem;
