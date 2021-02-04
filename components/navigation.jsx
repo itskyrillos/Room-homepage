@@ -1,13 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function Navigation() {
   const [state, setState] = useState({
     initial: false,
     clicked: null,
-    menuName: "Menu",
+    menuName: 'Menu',
   });
+
+  const [menuState, setMenuState] = useState({ menuOpened: false });
 
   const [disabled, setDisabled] = useState(false);
 
@@ -18,15 +20,9 @@ export default function Navigation() {
       setState({ clicked: false });
     };
 
-    router.events.on("routeChangeStart", closeMenu);
+    router.events.on('routeChangeStart', closeMenu);
   });
 
-  // const screenSize = window.innerWidth;
-  // useEffect(() => {
-  //   if (screenSize <= 1200) {
-  //     setState({ clicked: true });
-  //   }
-  // });
   const handleMenu = () => {
     disableMenu();
 
@@ -34,21 +30,30 @@ export default function Navigation() {
       setState({
         initial: null,
         clicked: true,
-        menuName: "Close",
+        menuName: 'Close',
       });
-      console.log(1);
+
+      setMenuState({ menuOpened: true });
+
+      console.log('Menu open init');
     } else if (state.clicked === true) {
       setState({
         clicked: !state.clicked,
-        menuName: "Menu",
+        menuName: 'Menu',
       });
-      console.log(2);
+
+      setMenuState({ menuOpened: false });
+
+      console.log('Menu close');
     } else if (state.clicked === false) {
       setState({
         clicked: !state.clicked,
-        menuName: "Close",
+        menuName: 'Close',
       });
-      console.log(3);
+
+      setMenuState({ menuOpened: true });
+
+      console.log('Menu open');
     }
   };
 
@@ -64,24 +69,28 @@ export default function Navigation() {
   useEffect(() => {
     if (state.clicked === false) {
       // close our menu
-      menu.style.visibility = "hidden";
+      menu.style.visibility = 'hidden';
     } else if (
       state.clicked === true ||
       (state.clicked === true && state.initial === null)
     ) {
       // open our menu
-      menu.style.visibility = "visible";
+      menu.style.visibility = 'visible';
     }
   });
 
   return (
     <nav className="nav">
       <button
-        className="nav__btn-burger"
+        className={
+          menuState.menuOpened === true ? 'btn-burger open' : 'btn-burger'
+        }
         disabled={disabled}
         onClick={handleMenu}
       >
-        Menu
+        <span className="btn-burger__line"></span>
+        <span className="btn-burger__line"></span>
+        <span className="btn-burger__line"></span>
       </button>
 
       <img className="nav__logo" src="logo.svg" alt="logo" />
@@ -100,7 +109,7 @@ export default function Navigation() {
         </li>
 
         <li className="nav__item">
-          <Link href="/shop" href="/about">
+          <Link href="/about">
             <a className="nav__link">about</a>
           </Link>
         </li>
