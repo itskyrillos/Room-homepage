@@ -11,10 +11,15 @@ function App({ Component, pageProps }) {
 
     const tl = gsap.timeline();
 
-    tl.to('.intro-overlay', 1.6, {
-      delay: 1,
-      width: 0,
-      ease: 'expo.inOut',
+    tl.from('.intro-overlay__logo', 1.6, {
+      delay: 0.5,
+      y: 150,
+      skewX: 0.7,
+      ease: 'expo.out',
+    }).from('.intro-overlay', 1.6, {
+      delay: 0.7,
+      left: 0,
+      ease: 'expo.in',
     });
   });
 
