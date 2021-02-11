@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import gsap from "gsap";
 
 export default function Navigation() {
   const [state, setState] = useState({
     initial: false,
-    clicked: null,
-    menuName: 'Menu',
+    clicked: null
   });
 
   const [menuState, setMenuState] = useState({ menuOpened: false });
@@ -20,7 +20,7 @@ export default function Navigation() {
       setState({ clicked: false });
     };
 
-    router.events.on('routeChangeStart', closeMenu);
+    router.events.on("routeChangeStart", closeMenu);
   });
 
   const handleMenu = () => {
@@ -29,31 +29,22 @@ export default function Navigation() {
     if (state.initial === false) {
       setState({
         initial: null,
-        clicked: true,
-        menuName: 'Close',
+        clicked: true
       });
 
       setMenuState({ menuOpened: true });
-
-      console.log('Menu open init');
     } else if (state.clicked === true) {
       setState({
-        clicked: !state.clicked,
-        menuName: 'Menu',
+        clicked: !state.clicked
       });
 
       setMenuState({ menuOpened: false });
-
-      console.log('Menu close');
     } else if (state.clicked === false) {
       setState({
-        clicked: !state.clicked,
-        menuName: 'Close',
+        clicked: !state.clicked
       });
 
       setMenuState({ menuOpened: true });
-
-      console.log('Menu open');
     }
   };
 
@@ -64,18 +55,47 @@ export default function Navigation() {
     }, 1200);
   };
 
-  let menu = useRef(null);
+  // Menu Animation
+  let tl = gsap.timeline();
+  // let menu = useRef(null);
+
+  const openMenuAnimation = () => {
+    tl.to(".nav__list-container", 0, {
+      display: "block"
+    })
+      .to(".nav__list-container", 0.5, {
+        opacity: 1
+      })
+      .from(".nav__item", 0.5, {
+        y: -20,
+        delay: -0.2,
+        opacity: 0,
+        stagger: {
+          amount: 0.1
+        }
+      });
+  };
+
+  const closeMenuAnimation = () => {
+    tl.to(".nav__list-container", 0.5, {
+      opacity: 0
+    }).to(".nav__list-container", 0, {
+      display: "none"
+    });
+  };
 
   useEffect(() => {
     if (state.clicked === false) {
       // close our menu
-      menu.style.visibility = 'hidden';
+      // menu.style.visibility = "hidden";
+      closeMenuAnimation();
     } else if (
       state.clicked === true ||
       (state.clicked === true && state.initial === null)
     ) {
       // open our menu
-      menu.style.visibility = 'visible';
+      // menu.style.visibility = "visible";
+      openMenuAnimation();
     }
   });
 
@@ -83,7 +103,7 @@ export default function Navigation() {
     <nav className="nav">
       <button
         className={
-          menuState.menuOpened === true ? 'btn-burger open' : 'btn-burger'
+          menuState.menuOpened === true ? "btn-burger open" : "btn-burger"
         }
         disabled={disabled}
         onClick={handleMenu}
@@ -93,33 +113,35 @@ export default function Navigation() {
         <span className="btn-burger__line"></span>
       </button>
 
-      <img className="nav__logo" src="logo.svg" alt="logo" />
+      <img className="nav__logo" src="logo.svg" alt="logo Room" />
 
-      <ul className="nav__list" ref={(el) => (menu = el)}>
-        <li className="nav__item">
-          <Link href="/">
-            <a className="nav__link">home</a>
-          </Link>
-        </li>
+      <div className="nav__list-container">
+        <ul className="nav__list">
+          <li className="nav__item">
+            <Link href="/">
+              <a className="nav__link">home</a>
+            </Link>
+          </li>
 
-        <li className="nav__item">
-          <Link href="/shop">
-            <a className="nav__link">shop</a>
-          </Link>
-        </li>
+          <li className="nav__item">
+            <Link href="/shop">
+              <a className="nav__link">shop</a>
+            </Link>
+          </li>
 
-        <li className="nav__item">
-          <Link href="/about">
-            <a className="nav__link">about</a>
-          </Link>
-        </li>
+          <li className="nav__item">
+            <Link href="/about">
+              <a className="nav__link">about</a>
+            </Link>
+          </li>
 
-        <li className="nav__item">
-          <Link href="/contact">
-            <a className="nav__link">contact</a>
-          </Link>
-        </li>
-      </ul>
+          <li className="nav__item">
+            <Link href="/contact">
+              <a className="nav__link">contact</a>
+            </Link>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 }

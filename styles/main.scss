@@ -1,21 +1,22 @@
 // ABSTRACTS
-@import './abstracts/variables';
-@import './abstracts/mixins';
+@import "./abstracts/variables";
+@import "./abstracts/mixins";
 
 // BASE
-// @import "./base/reset";
-@import './base/reset';
-@import './base/typography';
-@import 'swiper/swiper.scss';
-@import 'swiper/components/navigation/navigation.scss';
+@import "./base/reset";
+@import "./base/typography";
+@import "swiper/swiper.scss";
+@import "swiper/components/navigation/navigation.scss";
+@import "swiper/components/effect-fade/effect-fade.scss";
 
 // COMPONENTS
-@import './components/buttons';
-@import './components/introOverlay';
+@import "./components/buttons";
+@import "./components/header";
+@import "./components/introOverlay";
 
 // LAYOUT
-@import './layout/grid';
-@import './layout/navigation';
+@import "./layout/grid";
+@import "./layout/navigation";
 
 // PAGES
-@import './pages/home';
+@import "./pages/home";

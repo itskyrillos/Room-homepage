@@ -1,10 +1,8 @@
-import React from 'react';
-
 export default function IntroOverlay() {
   return (
     <div className="intro-overlay">
       <div className="intro-overlay__logo-box">
-        <img className="intro-overlay__logo" src="logo.svg" />
+        <img className="intro-overlay__logo" alt="logo Room" src="logo.svg" />
       </div>
     </div>
   );
