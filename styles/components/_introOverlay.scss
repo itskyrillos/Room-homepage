@@ -5,7 +5,7 @@
   z-index: 2000;
   position: absolute;
   top: 0;
-  left: 100%;
+  right: 0;
 
   &__logo-box {
     position: absolute;
@@ -13,11 +13,19 @@
     left: 50%;
     transform: translate(-50%, -50%);
     overflow: hidden;
-    height: 10vh;
+    height: 6vh;
+
+    @include xl {
+      height: 10vh;
+    }
   }
 
   &__logo {
     width: auto;
-    height: 10vh;
+    height: 6vh;
+
+    @include xl {
+      height: 10vh;
+    }
   }
 }

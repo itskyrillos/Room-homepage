@@ -16,7 +16,7 @@
   transition: all 0.2s ease-in-out;
 
   &::after {
-    content: '';
+    content: "";
     display: block;
     padding-bottom: calc(100% / (4 / 3));
   }
@@ -28,11 +28,11 @@
   }
 
   &--previous {
-    background-image: url('../../public/static/icon-slider-previous.svg');
+    background-image: url("../../public/static/icon-slider-previous.svg");
   }
 
   &--next {
-    background-image: url('../../public/static/icon-slider-next.svg');
+    background-image: url("../../public/static/icon-slider-next.svg");
   }
 
   &:hover {
@@ -58,7 +58,7 @@
   justify-content: space-between;
 
   @include xl {
-    visibility: hidden;
+    display: none;
   }
 
   &__line {

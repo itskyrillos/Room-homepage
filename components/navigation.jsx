@@ -4,11 +4,6 @@ import { useRouter } from "next/router";
 import gsap from "gsap";
 
 export default function Navigation() {
-  const [state, setState] = useState({
-    initial: false,
-    clicked: null
-  });
-
   const [menuState, setMenuState] = useState({ menuOpened: false });
 
   const [disabled, setDisabled] = useState(false);
@@ -17,7 +12,7 @@ export default function Navigation() {
 
   useEffect(() => {
     const closeMenu = () => {
-      setState({ clicked: false });
+      setMenuState({ menuOpened: false });
     };
 
     router.events.on("routeChangeStart", closeMenu);
@@ -26,25 +21,10 @@ export default function Navigation() {
   const handleMenu = () => {
     disableMenu();
 
-    if (state.initial === false) {
-      setState({
-        initial: null,
-        clicked: true
-      });
-
+    if (menuState.menuOpened === false) {
       setMenuState({ menuOpened: true });
-    } else if (state.clicked === true) {
-      setState({
-        clicked: !state.clicked
-      });
-
+    } else if (menuState.menuOpened === true) {
       setMenuState({ menuOpened: false });
-    } else if (state.clicked === false) {
-      setState({
-        clicked: !state.clicked
-      });
-
-      setMenuState({ menuOpened: true });
     }
   };
 
@@ -57,50 +37,38 @@ export default function Navigation() {
 
   // Menu Animation
   let tl = gsap.timeline();
-  // let menu = useRef(null);
 
   const openMenuAnimation = () => {
-    tl.to(".nav__list-container", 0, {
-      display: "block"
+    tl.to(".nav__list", 0, {
+      display: "flex"
     })
-      .to(".nav__list-container", 0.5, {
+      .to(".nav__list", 0.5, {
         opacity: 1
       })
       .from(".nav__item", 0.5, {
         y: -20,
         delay: -0.2,
-        opacity: 0,
-        stagger: {
-          amount: 0.1
-        }
+        opacity: 1
       });
   };
 
   const closeMenuAnimation = () => {
-    tl.to(".nav__list-container", 0.5, {
+    tl.to(".nav__item", 0.5, {
+      y: -20,
       opacity: 0
-    }).to(".nav__list-container", 0, {
-      display: "none"
-    });
+    })
+      .to(".nav__list", 0.5, {
+        opacity: 0,
+        delay: -0.2
+      })
+      .to(".nav__list", 0, {
+        display: "none",
+        delay: 1
+      });
   };
 
-  useEffect(() => {
-    if (state.clicked === false) {
-      // close our menu
-      // menu.style.visibility = "hidden";
-      closeMenuAnimation();
-    } else if (
-      state.clicked === true ||
-      (state.clicked === true && state.initial === null)
-    ) {
-      // open our menu
-      // menu.style.visibility = "visible";
-      openMenuAnimation();
-    }
-  });
-
   return (
-    <nav className="nav">
+    <nav className={menuState.menuOpened === true ? "nav open" : "nav"}>
       <button
         className={
           menuState.menuOpened === true ? "btn-burger open" : "btn-burger"
@@ -115,33 +83,31 @@ export default function Navigation() {
 
       <img className="nav__logo" src="logo.svg" alt="logo Room" />
 
-      <div className="nav__list-container">
-        <ul className="nav__list">
-          <li className="nav__item">
-            <Link href="/">
-              <a className="nav__link">home</a>
-            </Link>
-          </li>
+      <ul className="nav__list">
+        <li className="nav__item">
+          <Link href="/">
+            <a className="nav__link">home</a>
+          </Link>
+        </li>
 
-          <li className="nav__item">
-            <Link href="/shop">
-              <a className="nav__link">shop</a>
-            </Link>
-          </li>
+        <li className="nav__item">
+          <Link href="/shop">
+            <a className="nav__link">shop</a>
+          </Link>
+        </li>
 
-          <li className="nav__item">
-            <Link href="/about">
-              <a className="nav__link">about</a>
-            </Link>
-          </li>
+        <li className="nav__item">
+          <Link href="/about">
+            <a className="nav__link">about</a>
+          </Link>
+        </li>
 
-          <li className="nav__item">
-            <Link href="/contact">
-              <a className="nav__link">contact</a>
-            </Link>
-          </li>
-        </ul>
-      </div>
+        <li className="nav__item">
+          <Link href="/contact">
+            <a className="nav__link">contact</a>
+          </Link>
+        </li>
+      </ul>
     </nav>
   );
 }
